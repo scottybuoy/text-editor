@@ -15,13 +15,13 @@ const initdb = async () =>
   });
 
 // PUT to database
-export const putDb = async (content) => {
-  console.error('PUT to the database');
+export const putDb = async (id, content) => {
+  console.log('PUT to the database');
 
   const jateDb = await openDB('jate', 1);
   const tx = jateDb.transaction('jate', 'readwrite');
   const store = tw.objectStore('jate');
-  const request = store.put(content);
+  const request = store.put({ id: id, content: content });
   const result = await request;
   console.log('result.value', result);
   return result;
