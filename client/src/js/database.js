@@ -2,8 +2,8 @@ import { openDB } from 'idb';
 
 const initdb = async () =>
   openDB('jate', 1, {
+    // Add database schema if not already initialized
     upgrade(db) {
-      // Add database schema if not already initialized
       if (db.objectStoreNames.contains('jate')) {
         console.log('jate database already exists');
         return;
@@ -17,7 +17,6 @@ const initdb = async () =>
 // PUT to database
 export const putDb = async (content) => {
   console.log('PUT to the database');
-
   const jateDb = await openDB('jate', 1);
   const tx = jateDb.transaction('jate', 'readwrite');
   const store = tx.objectStore('jate');
